@@ -46,6 +46,17 @@ export const renderHeaderFooter = () => {
   document.querySelector(".footer").innerHTML = footer()
 }
 
+export const filterActivities = (activities, filter) => {
+  const negate = filter.includes("not")
+  if (negate) {
+    let filtered = activities.filter(act => !Boolean(base64ToJson(act)[filter.split("not")[1]]))
+    return filtered
+  } else {
+    let filtered = activities.filter(act => Boolean(base64ToJson(act)[filter]))
+    return filtered
+  }
+}
+
 const header = () => {
   return `
     <h1><a href="/">Randapp!</a></h1>
@@ -60,6 +71,6 @@ const header = () => {
 
 const footer = () => {
   return `
-    <p>This is the footer</p>
+    <p>Wilson Romero | BYU-I CIT330 | ${new Date().getFullYear()} | Powered by <a href="https://unsplash.com/">Unsplash.com</a> & <a href="http://www.boredapi.com/">Boredapi.com</a>
   `
 }

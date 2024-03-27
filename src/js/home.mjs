@@ -6,8 +6,8 @@ const menuElements = () => {
     <a href="/my_activities/index.html" class="btn fw btn-red">My activities</a>
     <a class="btn fw btn-orange random">Random activity</a>
     <a class="btn fw btn-blue feelLucky">I feel lucky</a>
-    <a class="btn fw btn-green">Completed activities</a>
-    <a class="btn fw btn-pink">In Progress</a>
+    <a href="/my_activities/index.html?filter=completed" class="btn fw btn-green">Completed activities</a>
+    <a href="/my_activities/index.html?filter=inProgress" class="btn fw btn-pink">In Progress</a>
     <a class="btn fw btn-aqua">Choose a category</a>
   </section>
   `
