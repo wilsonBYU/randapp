@@ -8,6 +8,7 @@ export function getParams(param) {
 export function joinData(activity, photo) {
   const data = { ...activity }
   data["completed"] = false
+  data["inProgress"] = false
   data["date"] = null
   data["image"] = {}
   data.image["id"] = photo.results[0].id

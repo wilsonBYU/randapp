@@ -249,8 +249,7 @@ a {
 .main_actions {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: s;
+  justify-content: var(--justify-content);
 }
 
 .main-example_activity>.picture_container {
@@ -271,6 +270,11 @@ a {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.myActivityList>a {
+  text-decoration: none;
+  color: black;
 }
 
 .activity-list_item>a {

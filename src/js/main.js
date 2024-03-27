@@ -12,6 +12,12 @@ main.renderMenu()
 main.init()
 
 
+document.querySelector(".feelLucky").addEventListener("click", async (e) => {
+  main.feelLucky()
+  main.init()
+})
+
 document.querySelector(".random").addEventListener("click", async (e) => {
-  alert("Generating new activity!")
+  main.removeActivity()
+  main.init()
 })
