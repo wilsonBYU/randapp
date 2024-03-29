@@ -16,9 +16,7 @@ const activityDetailsContent = (activity) => {
   <section class="main-example_activity">
     <h2>${activity.activity}</h2>
     <div class="picture_container">
-      <picture>
         <img src="${activity.image.src.full}" alt="Unsplash.com - ${activity.image.alt_description}">
-      </picture>
     </div>
     <p>
       <span>Accesibility: ${activity.accessibility}</span> |

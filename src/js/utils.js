@@ -44,6 +44,10 @@ export const setLocalStorage = (key, data) => {
 export const renderHeaderFooter = () => {
   document.querySelector(".navigation").innerHTML = header()
   document.querySelector(".footer").innerHTML = footer()
+  document.querySelector(".menuButton").addEventListener("click", (e) => {
+    document.querySelector(".navigation_link-list").classList.toggle("hideMenu")
+  })
+
 }
 
 export const filterActivities = (activities, filter) => {
@@ -59,8 +63,11 @@ export const filterActivities = (activities, filter) => {
 
 const header = () => {
   return `
-    <h1><a href="/">Randapp!</a></h1>
-    <ul class="navigation_link-list">
+    <div class="menu_options">
+      <h1><a href="/">Randapp!</a></h1>
+      <button class="menuButton"><i class="fas fa-bars"></i></button>
+    </div>
+    <ul class="navigation_link-list hideMenu">
       <li class="navigation_link-item"><a href="/sitemap/"><i class="fas fa-sitemap"></i> Site map</a></li>
       <li class="navigation_link-item"><a href="/site_status/"><i class="fas fa-cogs"></i> Site Status</a></li>
       <li class="navigation_link-item"><a href="/about/"><i class="fas fa-info-circle"></i> About</a></li>
