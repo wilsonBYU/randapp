@@ -3,10 +3,10 @@ import { base64ToJson, getLocalStorage, jsonToBase64, setLocalStorage } from "./
 const options = () => {
   return `
     <section class="main_actions" style="--justify-content: start">
-      <a href="/" class="btn fw btn-blue">Home</a>
-      <a href="/my_activities/index.html" class="btn fw btn-aqua">My activities</a>
-      <a class="btn fw btn-red delete">Delete</a>
-      <a class="btn fw btn-green save">Save</a>
+      <a href="/" class="btn fw btn-blue"><i class="fas fa-home"></i> Home</a>
+      <a href="/my_activities/" class="btn fw btn-aqua"><i class="fas fa-tasks"></i> My activities</a>
+      <a class="btn fw btn-red delete"><i class="fas fa-trash-alt"></i> Delete</a>
+      <a class="btn fw btn-green save"><i class="fas fa-save"></i> Save</a>
     </section>
   `
 }
@@ -67,7 +67,7 @@ export default class ActivityDetails {
     const storageData = getLocalStorage("activities") || []
     const newData = storageData.filter(item => item !== this.data)
     localStorage.setItem("activities", JSON.stringify(newData))
-    window.location.href = "/my_activities/index.html"
+    window.location.href = "/my_activities/"
   }
 
   handleDate(e) {

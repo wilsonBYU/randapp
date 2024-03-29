@@ -1,4 +1,4 @@
-import { joinData } from "./utils"
+import { joinData, setLocalStorage } from "./utils"
 
 const ACTIVITY_URL = import.meta.env.VITE_ACTIVITY_URL
 const UNSPLASH_URL = import.meta.env.VITE_UNSPLASH_URL
@@ -44,8 +44,9 @@ https://calendar.yahoo.com/?
   &v=60
 */
 
-const responseToJson = async (res) => {
+const responseToJson = async (res, api) => {
   const response = await res.json()
+  localStorage.setItem(api, res.ok)
   if (res.ok) {
     return response
   } else {
@@ -61,9 +62,9 @@ export default class ExternalServices {
     this.item = {}
   }
 
-  async fetchRandomActivity(type = "activity") {
-    const response = await fetch(`${ACTIVITY_URL}${type}`)
-    const data = await responseToJson(response)
+  async fetchRandomActivity(type) {
+    const response = await fetch(type ? `${ACTIVITY_URL}${type}` : `${ACTIVITY_URL}`)
+    const data = await responseToJson(response, "boredApi")
     return data
   }
 
@@ -77,12 +78,12 @@ export default class ExternalServices {
         "h": "1080"
       }
     })
-    const data = await responseToJson(response)
+    const data = await responseToJson(response, "unsplashApi")
     return data
   }
 
-  async getRandomActivity() {
-    this.activity = await this.fetchRandomActivity()
+  async getRandomActivity(type = null) {
+    this.activity = await this.fetchRandomActivity(type)
     this.photo = await this.fetchRelatedImages(this.activity.activity)
     const data = joinData(this.activity, this.photo)
     return data

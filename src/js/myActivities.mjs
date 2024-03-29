@@ -4,7 +4,7 @@ const sortMenu = () => {
   return `
     <section>
       <label for="filter">
-        Filter
+      <i class="fas fa-filter"></i> Filter
         <select id="sort">
           <option value="all">All</option>
           <option value="completed">Completed</option>
@@ -22,7 +22,7 @@ const sortMenu = () => {
 const activityItem = (activity) => {
   const obj = base64ToJson(activity)
   return `
-    <a href="/activity_details/index.html?data=${activity}">
+    <a href="/activity_details/?data=${activity}">
       <li class="btn btn-orange activity-list_item">
         <div class="activity-list_item-container">
           <div>

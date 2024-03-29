@@ -61,10 +61,9 @@ const header = () => {
   return `
     <h1><a href="/">Randapp!</a></h1>
     <ul class="navigation_link-list">
-      <li class="navigation_link-item"><a href="#">Site map</a></li>
-      <li class="navigation_link-item"><a href="#">Site Status</a></li>
-      <li class="navigation_link-item"><a href="#">Design</a></li>
-      <li class="navigation_link-item"><a href="#">About</a></li>
+      <li class="navigation_link-item"><a href="/sitemap/"><i class="fas fa-sitemap"></i> Site map</a></li>
+      <li class="navigation_link-item"><a href="/site_status/"><i class="fas fa-cogs"></i> Site Status</a></li>
+      <li class="navigation_link-item"><a href="/about/"><i class="fas fa-info-circle"></i> About</a></li>
     </ul>
   `
 }

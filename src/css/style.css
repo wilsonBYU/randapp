@@ -293,3 +293,19 @@ a {
 .activity-list_item-container img {
   max-width: 75px;
 }
+
+.category-list_item {
+  display: flex;
+  justify-content: space-between;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--cast-shadow) var(--orange-dark);
+  background-color: var(--orange);
+  margin-bottom: 1em;
+  padding: 0.5em 1em;
+}
+
+.category-list_item h3 {
+  padding: 0;
+  margin: 0;
+}
