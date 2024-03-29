@@ -1,5 +1,5 @@
 import MyActivities from "./myActivities.mjs";
-import { getLocalStorage, renderHeaderFooter } from "./utils";
+import { filterActivities, getLocalStorage, getParams, renderHeaderFooter } from "./utils";
 
 renderHeaderFooter()
 
