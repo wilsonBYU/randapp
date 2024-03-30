@@ -3,12 +3,12 @@ import { jsonToBase64, setLocalStorage } from "./utils"
 const menuElements = () => {
   return `
   <section class="main_actions" style="--justify-content: space-between">
-    <a href="/my_activities/" class="btn fw btn-red"><i class="fas fa-tasks"></i> My activities</a>
+    <a href="/randapp/my_activities/" class="btn fw btn-red"><i class="fas fa-tasks"></i> My activities</a>
     <a class="btn fw btn-orange random"><i class="fas fa-random"></i> Random activity</a>
     <a class="btn fw btn-blue feelLucky"><i class="fas fa-fan"></i> I feel lucky</a>
-    <a href="/my_activities/?filter=completed" class="btn fw btn-green"><i class="fas fa-filter"></i> Completed activities</a>
-    <a href="/my_activities/?filter=inProgress" class="btn fw btn-pink"><i class="fas fa-filter"></i> In Progress</a>
-    <a href="/category/" class="btn fw btn-aqua"><i class="fas fa-sliders-h"></i> Choose a category</a>
+    <a href="/randapp/my_activities/?filter=completed" class="btn fw btn-green"><i class="fas fa-filter"></i> Completed activities</a>
+    <a href="/randapp/my_activities/?filter=inProgress" class="btn fw btn-pink"><i class="fas fa-filter"></i> In Progress</a>
+    <a href="/randapp/category/" class="btn fw btn-aqua"><i class="fas fa-sliders-h"></i> Choose a category</a>
   </section>
   `
 }
@@ -55,7 +55,7 @@ export default class HomeScreen {
   goToActivity() {
     const activity64 = jsonToBase64(this.activity)
     setLocalStorage("activities", activity64)
-    window.location.href = `/activity_details/?data=${activity64}`
+    window.location.href = `/randapp/activity_details/?data=${activity64}`
   }
 
   removeActivity() {

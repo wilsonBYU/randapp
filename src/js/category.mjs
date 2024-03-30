@@ -58,7 +58,7 @@ export default class Category {
       const image = await this.datasource.fetchRelatedImages(activity.activity)
       const activity64 = jsonToBase64(joinData(activity, image))
       setLocalStorage("activities", activity64)
-      document.location.href = `/activity_details/?data=${activity64}`
+      document.location.href = `/randapp/activity_details/?data=${activity64}`
     })
   }
 

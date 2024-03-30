@@ -22,7 +22,7 @@ const sortMenu = () => {
 const activityItem = (activity) => {
   const obj = base64ToJson(activity)
   return `
-    <a href="/activity_details/?data=${activity}">
+    <a href="/randapp/activity_details/?data=${activity}">
       <li class="btn btn-orange activity-list_item">
         <div class="activity-list_item-container">
           <div>
@@ -71,7 +71,7 @@ export default class MyActivities {
     if (this.activityList.length > 0) {
       this.parentElement.insertAdjacentHTML("beforeend", renderedList)
     } else {
-      this.parentElement.insertAdjacentHTML("afterbegin", "<h2>You have not added any activity yet. Click</h2><a href='/' class='btn btn-aqua'>Home<a><h2>for more options</h2>")
+      this.parentElement.insertAdjacentHTML("afterbegin", "<h2>You have not added any activity yet. Click</h2><a href='/randapp/' class='btn btn-aqua'>Home<a><h2>for more options</h2>")
     }
   }
 }
