@@ -64,7 +64,7 @@ export const filterActivities = (activities, filter) => {
 const header = () => {
   return `
     <div class="menu_options">
-      <h1><a href="/">Randapp!</a></h1>
+      <h1><a href="/ranpdapp/">Randapp!</a></h1>
       <button class="menuButton"><i class="fas fa-bars"></i></button>
     </div>
     <ul class="navigation_link-list hideMenu">
