@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: "src/",
-  base: "/randapp/"
+  base: "/randapp/",
   build: {
     outDir: "../dist",
     rollupOptions: {
