@@ -1,5 +1,5 @@
-import { getLocalStorage, joinData, jsonToBase64, setLocalStorage } from "./utils"
-
+import { joinData, jsonToBase64, setLocalStorage } from "./utils"
+import Loader from "./loader.mjs"
 const activityButtons = () => {
   return `
   <section class="main_actions" style="--justify-content: space-between">
@@ -27,7 +27,7 @@ const activityItem = ([activity, index]) => {
   `
 }
 
-const activityList = (activities) => `<section class="category-list fw">${activities.map(activityItem).join("")}</section>`
+const activityList = (activities) => `<section class="category-list fw loading">${activities.map(activityItem).join("")}</section>`
 
 export default class Category {
   constructor(datasource, category, parent) {
@@ -35,17 +35,21 @@ export default class Category {
     this.datasource = datasource
     this.parent = parent
     this.activities = []
+    this.loader = new Loader(this.parent)
   }
 
   async init() {
     this.renderCategoryButtons()
+    this.loader.show()
     await this.renderActivities()
     document.querySelectorAll(".category").forEach(this.setCategoryEventListener.bind(this))
+
   }
 
   setCategoryEventListener(element) {
     element.addEventListener("click", (e) => {
       this.category = e.target.dataset.category
+      this.loader.show()
       this.cleanList()
       this.renderActivities()
     })
@@ -71,6 +75,8 @@ export default class Category {
     const renderedActivities = activityList(this.activities.map((act) => [act, this.activities.indexOf(act)]))
     this.parent.insertAdjacentHTML("beforeend", renderedActivities)
     document.querySelectorAll(".addItem").forEach(this.setAddEventListener.bind(this))
+    const categoryParent = document.querySelector(".category-list")
+    this.loader.removeOnFetch(categoryParent, "loading")
   }
 
   renderCategoryButtons() {

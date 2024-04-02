@@ -256,7 +256,7 @@ a {
 }
 
 .main-example_activity {
-  width: 75%;
+  width: 100%;
 }
 
 .main-example_activity>.picture_container {
@@ -328,6 +328,133 @@ a {
 
 .menuButton {
   display: none;
+}
+
+.loading {
+  display: none;
+}
+
+.loader-animation {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-animation>i {
+  animation: rotate 1s linear infinite;
+  font-size: 3em;
+}
+
+.alert-container {
+  max-width: 50%;
+  position: absolute;
+  align-self: center;
+  z-index: 500;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1em;
+  margin: 0.5em 0;
+  gap: 3em;
+}
+
+.show-alert {
+  animation: alert-show 0.5s ease-in normal forwards;
+}
+
+.hide-alert {
+  animation: alert-hide 0.5s ease-out normal forwards;
+}
+
+
+.primary {
+  background-color: var(--blue);
+  border-color: var(--blue-dark);
+  color: var(--blue-darker);
+}
+
+.primary .close-alert:hover {
+  background-color: var(--blue-dark);
+}
+
+.success {
+  background-color: var(--green);
+  border-color: var(--green-dark);
+  color: var(--green-darker);
+}
+
+.success .close-alert:hover {
+  background-color: var(--green-dark);
+}
+
+.close-alert {
+  border-radius: var(--border-radius);
+}
+
+.alert h3,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.alert h3 {
+  font-weight: 600;
+}
+
+.alert p {
+  font-weight: 400;
+}
+
+.close-alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  width: 2em;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes alert-show {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes alert-hide {
+  0% {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
 }
 
 @media (max-width: 576px) {
@@ -429,6 +556,10 @@ a {
 
   .main-example_activity {
     width: 100%;
+  }
+
+  .alert-container {
+    max-width: 100%;
   }
 
 }

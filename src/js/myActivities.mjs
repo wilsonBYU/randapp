@@ -29,7 +29,7 @@ const activityItem = (activity) => {
             <p class="mp-0">${obj.activity}</p>
             <sub>Completed: ${obj.completed ? "Yes" : "No"} | In Progress: ${obj.inProgress ? "Yes" : "No"} | Date: ${obj.date ? obj.date : "Not Set"}</sub>
           </div>
-          <img src="${obj.image.src.thumb}" />
+          <img class="img-loading" src="${obj.image.src.thumb}" />
         </div>
       </li>
     </a>

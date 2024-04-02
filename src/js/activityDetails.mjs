@@ -1,4 +1,6 @@
-import { base64ToJson, getLocalStorage, jsonToBase64, setLocalStorage } from "./utils"
+import { base64ToJson, getLocalStorage, jsonToBase64 } from "./utils"
+import Loader from "./loader.mjs"
+import Alert from "./alert.mjs"
 
 const options = () => {
   return `
@@ -13,10 +15,10 @@ const options = () => {
 
 const activityDetailsContent = (activity) => {
   return `
-  <section class="main-example_activity">
+  <section class="main-example_activity loading">
     <h2>${activity.activity}</h2>
     <div class="picture_container">
-        <img src="${activity.image.src.full}" alt="Unsplash.com - ${activity.image.alt_description}">
+        <img class="img-loading" src="${activity.image.src.full}" alt="Unsplash.com - ${activity.image.alt_description}">
     </div>
     <p>
       <span>Accesibility: ${activity.accessibility}</span> |
@@ -36,18 +38,17 @@ export default class ActivityDetails {
     this.data = data
     this.dataJson = base64ToJson(this.data)
     this.parentElement = parentElement
+    this.loader = new Loader(parentElement)
+    this.alert = new Alert()
   }
 
   init() {
     this.parentElement.insertAdjacentHTML("afterbegin", options())
-    let renderData = activityDetailsContent(this.dataJson)
-    this.parentElement.insertAdjacentHTML("beforeend", renderData)
-    document.querySelector("#participants").addEventListener("change", (e) => this.handleParticipants(e))
-    document.querySelector("#date").addEventListener("change", (e) => this.handleDate(e))
-    document.querySelector("#completed").addEventListener("change", (e) => this.handleCompleted(e))
-    document.querySelector("#inProgress").addEventListener("change", (e) => this.handleInProgress(e))
-    document.querySelector(".delete").addEventListener("click", (e) => this.delete())
-    document.querySelector(".save").addEventListener("click", (e) => this.save())
+    this.loader.show()
+    this.alert.init()
+    this.renderActivity()
+    this.handleFormData()
+    this.handleLoad()
   }
 
   save() {
@@ -59,6 +60,7 @@ export default class ActivityDetails {
       storageData = [...cleanedData, newItem]
       localStorage.setItem("activities", JSON.stringify(storageData))
     }
+    this.alert.renderAlert({ title: "Data saved!", body: "The activity data has been saved successfuly!", type: "success" })
   }
 
   delete() {
@@ -66,6 +68,26 @@ export default class ActivityDetails {
     const newData = storageData.filter(item => item !== this.data)
     localStorage.setItem("activities", JSON.stringify(newData))
     window.location.href = "/randapp/my_activities/"
+  }
+
+  renderActivity() {
+    let renderData = activityDetailsContent(this.dataJson)
+    this.parentElement.insertAdjacentHTML("beforeend", renderData)
+  }
+
+  handleLoad() {
+    const imageToLoad = document.querySelector(".img-loading")
+    const parentLoader = document.querySelector(".main-example_activity")
+    this.loader.removeOnImageLoad(imageToLoad, parentLoader, "loading")
+  }
+
+  handleFormData() {
+    document.querySelector("#participants").addEventListener("change", (e) => this.handleParticipants(e))
+    document.querySelector("#date").addEventListener("change", (e) => this.handleDate(e))
+    document.querySelector("#completed").addEventListener("change", (e) => this.handleCompleted(e))
+    document.querySelector("#inProgress").addEventListener("change", (e) => this.handleInProgress(e))
+    document.querySelector(".delete").addEventListener("click", (e) => this.delete())
+    document.querySelector(".save").addEventListener("click", (e) => this.save())
   }
 
   handleDate(e) {

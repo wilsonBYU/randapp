@@ -1,4 +1,5 @@
 import { jsonToBase64, setLocalStorage } from "./utils"
+import Loader from "./loader.mjs"
 
 const menuElements = () => {
   return `
@@ -15,11 +16,11 @@ const menuElements = () => {
 
 const exampleActivity = (activity) => {
   return `
-  <section class="main-example_activity">
+  <section class="main-example_activity loading">
     <h2>${activity.activity}</h2>
     <div class="picture_container">
      
-        <img src="${activity.image.src.full}" alt="Unsplash.com - ${activity.image.alt_description}">
+        <img class="img-loading" src="${activity.image.src.full}" alt="Unsplash.com - ${activity.image.alt_description}">
       
     </div>
     <p>
@@ -37,6 +38,7 @@ export default class HomeScreen {
     this.dataSource = dataSource
     this.container = container
     this.activity = []
+    this.loader = new Loader(this.container)
   }
 
   async init() {
@@ -45,6 +47,7 @@ export default class HomeScreen {
     document.querySelector(".addActivity").addEventListener("click", () => {
       this.goToActivity()
     })
+
   }
 
   async feelLucky() {
@@ -69,7 +72,11 @@ export default class HomeScreen {
   }
 
   renderActivity() {
+    this.loader.show()
     const activityForm = exampleActivity(this.activity)
     this.container.insertAdjacentHTML("beforeend", activityForm)
+    const activityContainer = document.querySelector(".main-example_activity")
+    const activityImage = document.querySelector(".img-loading")
+    this.loader.removeOnImageLoad(activityImage, activityContainer, "loading")
   }
 }

@@ -1,3 +1,4 @@
+import Alert from "./alert.mjs";
 import Category from "./category.mjs";
 import ExternalServices from "./services.mjs";
 import { getParams, renderHeaderFooter } from "./utils";
