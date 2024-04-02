@@ -1,10 +1,10 @@
 import MyActivities from "./myActivities.mjs";
-import { filterActivities, getLocalStorage, getParams, renderHeaderFooter } from "./utils";
+import { getLocalStorage, renderHeaderFooter } from "./utils";
 
-renderHeaderFooter()
+renderHeaderFooter();
 
-const list = getLocalStorage("activities")
-const parent = document.querySelector(".main_container")
+const list = getLocalStorage("activities");
+const parent = document.querySelector(".main_container");
 
-const activities = new MyActivities(list, parent)
-activities.init()
+const activities = new MyActivities(list, parent);
+activities.init();

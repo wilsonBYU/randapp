@@ -9,45 +9,50 @@ const alertTemplate = ({ title, body, type }) => {
         <button class="close-alert"><i class="fas fa-times"></i></button>
       </div>
     </section>
-  `
-}
+  `;
+};
 
 export default class Alert {
   constructor() {
-    this.container = document.querySelector("body")
-    this.handleContainer()
+    this.container = document.querySelector("body");
+    this.handleContainer();
   }
 
   init() {
-    this.handleContainer()
+    this.handleContainer();
   }
 
   renderAlert(data) {
-    let alert = alertTemplate(data)
-    document.querySelector(".alert-container").insertAdjacentHTML("beforeend", alert)
-    this.removeAlertEventListener()
+    let alert = alertTemplate(data);
+    document
+      .querySelector(".alert-container")
+      .insertAdjacentHTML("beforeend", alert);
+    this.removeAlertEventListener();
   }
 
   handleContainer() {
-    const hasAlertContainer = document.querySelector(".alert-container")
-    console.log(hasAlertContainer)
-    hasAlertContainer ? null : this.addAlertContainer()
+    const hasAlertContainer = document.querySelector(".alert-container");
+    console.log(hasAlertContainer);
+    hasAlertContainer ? null : this.addAlertContainer();
   }
 
   addAlertContainer() {
-    this.container.insertAdjacentHTML("afterbegin", `<section class="alert-container"></section>`)
+    this.container.insertAdjacentHTML(
+      "afterbegin",
+      "<section class='alert-container'></section>",
+    );
   }
 
   removeAlertEventListener() {
-    document.querySelectorAll(".close-alert").forEach(element => {
-      element.addEventListener("click", e => {
-        const alert = e.target.closest(".alert")
-        alert.classList.toggle("show-alert")
-        alert.classList.add("hide-alert")
-        e.target.closest(".alert").addEventListener("animationend", e => {
-          e.target.remove()
-        })
-      })
-    })
+    document.querySelectorAll(".close-alert").forEach((element) => {
+      element.addEventListener("click", (e) => {
+        const alert = e.target.closest(".alert");
+        alert.classList.toggle("show-alert");
+        alert.classList.add("hide-alert");
+        e.target.closest(".alert").addEventListener("animationend", (e) => {
+          e.target.remove();
+        });
+      });
+    });
   }
 }

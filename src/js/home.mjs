@@ -1,9 +1,9 @@
-import { jsonToBase64, setLocalStorage } from "./utils"
-import Loader from "./loader.mjs"
+import { jsonToBase64, setLocalStorage } from "./utils";
+import Loader from "./loader.mjs";
 
 const menuElements = () => {
   return `
-  <section class="main_actions" style="--justify-content: space-between">
+  <section class="main_actions" style="--justify-content: flex-start">
     <a href="/randapp/my_activities/" class="btn fw btn-red"><i class="fas fa-tasks"></i> My activities</a>
     <a class="btn fw btn-orange random"><i class="fas fa-random"></i> Random activity</a>
     <a class="btn fw btn-blue feelLucky"><i class="fas fa-fan"></i> I feel lucky</a>
@@ -11,8 +11,8 @@ const menuElements = () => {
     <a href="/randapp/my_activities/?filter=inProgress" class="btn fw btn-pink"><i class="fas fa-filter"></i> In Progress</a>
     <a href="/randapp/category/" class="btn fw btn-aqua"><i class="fas fa-sliders-h"></i> Choose a category</a>
   </section>
-  `
-}
+  `;
+};
 
 const exampleActivity = (activity) => {
   return `
@@ -25,58 +25,57 @@ const exampleActivity = (activity) => {
     </div>
     <p>
       <span>Accesibility: ${activity.accessibility}</span> |
-      <span>Type: <a href="#">${activity.type}</a></span> |
+      <span>Type: <a href="./category/?category=${activity.type}">${activity.type}</a></span> |
       <span>Participants: ${activity.participants}</span> |
       <span>Price: ${activity.price}</span>
     </p>
     <button class="btn fw btn-orange addActivity"><i class="fas fa-plus"></i> Add to my activities!</button>
-  </section>`
-}
+  </section>`;
+};
 
 export default class HomeScreen {
   constructor(dataSource, container) {
-    this.dataSource = dataSource
-    this.container = container
-    this.activity = []
-    this.loader = new Loader(this.container)
+    this.dataSource = dataSource;
+    this.container = container;
+    this.activity = [];
+    this.loader = new Loader(this.container);
   }
 
   async init() {
-    this.activity = await this.dataSource.getRandomActivity()
-    this.renderActivity()
+    this.activity = await this.dataSource.getRandomActivity();
+    this.renderActivity();
     document.querySelector(".addActivity").addEventListener("click", () => {
-      this.goToActivity()
-    })
-
+      this.goToActivity();
+    });
   }
 
   async feelLucky() {
-    this.activity = await this.dataSource.getRandomActivity()
-    this.goToActivity()
+    this.activity = await this.dataSource.getRandomActivity();
+    this.goToActivity();
   }
 
   goToActivity() {
-    const activity64 = jsonToBase64(this.activity)
-    setLocalStorage("activities", activity64)
-    window.location.href = `/randapp/activity_details/?data=${activity64}`
+    const activity64 = jsonToBase64(this.activity);
+    setLocalStorage("activities", activity64);
+    window.location.href = `/randapp/activity_details/?data=${activity64}`;
   }
 
   removeActivity() {
-    const item = document.querySelector(".main-example_activity")
-    this.container.removeChild(item)
+    const item = document.querySelector(".main-example_activity");
+    this.container.removeChild(item);
   }
 
   renderMenu() {
-    const menu = menuElements()
-    this.container.insertAdjacentHTML("afterbegin", menu)
+    const menu = menuElements();
+    this.container.insertAdjacentHTML("afterbegin", menu);
   }
 
   renderActivity() {
-    this.loader.show()
-    const activityForm = exampleActivity(this.activity)
-    this.container.insertAdjacentHTML("beforeend", activityForm)
-    const activityContainer = document.querySelector(".main-example_activity")
-    const activityImage = document.querySelector(".img-loading")
-    this.loader.removeOnImageLoad(activityImage, activityContainer, "loading")
+    this.loader.show();
+    const activityForm = exampleActivity(this.activity);
+    this.container.insertAdjacentHTML("beforeend", activityForm);
+    const activityContainer = document.querySelector(".main-example_activity");
+    const activityImage = document.querySelector(".img-loading");
+    this.loader.removeOnImageLoad(activityImage, activityContainer, "loading");
   }
 }

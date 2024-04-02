@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Tauri&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Tauri&display=swap");
 
 :root {
   --border-radius: 10px;
@@ -30,7 +30,7 @@
   --cast-shadow-hover: 0px 10px 0;
   --cast-shadow-active: 0 2px 0;
   --font-tauri: "Tauri", sans-serif;
-  --font-alkatra: "Alkatra", system-ui
+  --font-alkatra: "Alkatra", system-ui;
 }
 
 .btn {
@@ -156,7 +156,7 @@ h1 {
   text-shadow: 0 2px 0 var(--background-color-dark);
 }
 
-h1>a {
+h1 > a {
   text-decoration: none;
   color: black;
 }
@@ -259,18 +259,19 @@ a {
   width: 100%;
 }
 
-.main-example_activity>.picture_container {
-  max-height: 350px;
+.main-example_activity > .picture_container {
+  max-height: 550px;
   padding: 0;
   margin: 0;
   display: block;
   overflow: hidden;
+  margin-bottom: 1em;
   border: var(--border) var(--orange-dark);
   border-radius: var(--border-radius);
   box-shadow: var(--cast-shadow) var(--orange-dark);
 }
 
-.main-example_activity>.picture_container>img {
+.main-example_activity > .picture_container > img {
   max-width: 100%;
   height: auto;
   margin: 0;
@@ -283,12 +284,12 @@ a {
   padding: 0;
 }
 
-.myActivityList>a {
+.myActivityList > a {
   text-decoration: none;
   color: black;
 }
 
-.activity-list_item>a {
+.activity-list_item > a {
   text-decoration: none;
   color: black;
 }
@@ -341,7 +342,7 @@ a {
   align-items: center;
 }
 
-.loader-animation>i {
+.loader-animation > i {
   animation: rotate 1s linear infinite;
   font-size: 3em;
 }
@@ -374,7 +375,6 @@ a {
 .hide-alert {
   animation: alert-hide 0.5s ease-out normal forwards;
 }
-
 
 .primary {
   background-color: var(--blue);
@@ -458,7 +458,6 @@ p {
 }
 
 @media (max-width: 576px) {
-
   body {
     width: 100%;
     padding: 0;
@@ -531,7 +530,7 @@ p {
     height: auto;
   }
 
-  .main-example_activity>.picture_container {
+  .main-example_activity > .picture_container {
     border: none;
     box-shadow: none;
     border-radius: 0;
@@ -544,7 +543,7 @@ p {
     display: none;
   }
 
-  .main-example_activity>.picture_container>img {
+  .main-example_activity > .picture_container > img {
     border: var(--border) var(--orange-dark);
     border-radius: var(--border-radius);
     box-shadow: var(--cast-shadow) var(--orange-dark);
@@ -561,5 +560,4 @@ p {
   .alert-container {
     max-width: 100%;
   }
-
 }

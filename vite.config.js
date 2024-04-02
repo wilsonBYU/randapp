@@ -14,7 +14,7 @@ export default defineConfig({
         category: resolve(__dirname, "src/category/index.html"),
         activities: resolve(__dirname, "src/my_activities/index.html"),
         status: resolve(__dirname, "src/site_status/index.html"),
-        sitemap: resolve(__dirname, "src/sitemap/index.html")
+        sitemap: resolve(__dirname, "src/sitemap/index.html"),
       },
     },
   },

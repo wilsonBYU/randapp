@@ -1,8 +1,8 @@
-import { joinData, jsonToBase64, setLocalStorage } from "./utils"
-import Loader from "./loader.mjs"
+import { joinData, jsonToBase64, setLocalStorage } from "./utils";
+import Loader from "./loader.mjs";
 const activityButtons = () => {
   return `
-  <section class="main_actions" style="--justify-content: space-between">
+  <section class="main_actions" style="--justify-content: flex-start">
     <button class="category btn btn-blue fw" data-category="education"><i class="fas fa-book"></i> Education</button>
     <button class="category btn btn-red fw" data-category="recreational"><i class="fas fa-dice"></i> Recreational</button>
     <button class="category btn btn-green fw" data-category="social"><i class="fas fa-users"></i> Social</button>
@@ -12,8 +12,8 @@ const activityButtons = () => {
     <button class="category btn btn-blue fw" data-category="relaxation"><i class="fas fa-hot-tub"></i> Relaxation</button>
     <button class="category btn btn-red fw" data-category="music"><i class="fas fa-music"></i> Music</button>
     <button class="category btn btn-green fw" data-category="busywork"><i class="fas fa-briefcase"></i> Busywork</button>
-  </section>`
-}
+  </section>`;
+};
 
 const activityItem = ([activity, index]) => {
   return `
@@ -24,63 +24,74 @@ const activityItem = ([activity, index]) => {
       </div>
       <button class="btn btn-green addItem" data-index="${index}"><i class="fas fa-plus"></i></button>
     </section>
-  `
-}
+  `;
+};
 
-const activityList = (activities) => `<section class="category-list fw loading">${activities.map(activityItem).join("")}</section>`
+const activityList = (activities) =>
+  `<section class="category-list fw loading">${activities.map(activityItem).join("")}</section>`;
 
 export default class Category {
   constructor(datasource, category, parent) {
-    this.category = category
-    this.datasource = datasource
-    this.parent = parent
-    this.activities = []
-    this.loader = new Loader(this.parent)
+    this.category = category;
+    this.datasource = datasource;
+    this.parent = parent;
+    this.activities = [];
+    this.loader = new Loader(this.parent);
   }
 
   async init() {
-    this.renderCategoryButtons()
-    this.loader.show()
-    await this.renderActivities()
-    document.querySelectorAll(".category").forEach(this.setCategoryEventListener.bind(this))
-
+    this.renderCategoryButtons();
+    this.loader.show();
+    await this.renderActivities();
+    document
+      .querySelectorAll(".category")
+      .forEach(this.setCategoryEventListener.bind(this));
   }
 
   setCategoryEventListener(element) {
     element.addEventListener("click", (e) => {
-      this.category = e.target.dataset.category
-      this.loader.show()
-      this.cleanList()
-      this.renderActivities()
-    })
+      this.category = e.target.dataset.category;
+      this.loader.show();
+      this.cleanList();
+      this.renderActivities();
+    });
   }
 
   async setAddEventListener(element) {
     await element.addEventListener("click", async (e) => {
-      const index = e.target.dataset.index
-      let activity = this.activities[index]
-      const image = await this.datasource.fetchRelatedImages(activity.activity)
-      const activity64 = jsonToBase64(joinData(activity, image))
-      setLocalStorage("activities", activity64)
-      document.location.href = `/randapp/activity_details/?data=${activity64}`
-    })
+      const index = e.target.dataset.index;
+      let activity = this.activities[index];
+      const image = await this.datasource.fetchRelatedImages(activity.activity);
+      const activity64 = jsonToBase64(joinData(activity, image));
+      setLocalStorage("activities", activity64);
+      document.location.href = `/randapp/activity_details/?data=${activity64}`;
+    });
   }
 
   cleanList() {
-    this.parent.removeChild(document.querySelector(".category-list"))
+    this.parent.removeChild(document.querySelector(".category-list"));
   }
 
   async renderActivities() {
-    this.activities = await Promise.all([...Array(6).keys()].map(i => this.datasource.fetchRandomActivity(this.category ? `?type=${this.category}` : null)))
-    const renderedActivities = activityList(this.activities.map((act) => [act, this.activities.indexOf(act)]))
-    this.parent.insertAdjacentHTML("beforeend", renderedActivities)
-    document.querySelectorAll(".addItem").forEach(this.setAddEventListener.bind(this))
-    const categoryParent = document.querySelector(".category-list")
-    this.loader.removeOnFetch(categoryParent, "loading")
+    this.activities = await Promise.all(
+      [...Array(6).keys()].map(() =>
+        this.datasource.fetchRandomActivity(
+          this.category ? `?type=${this.category}` : null,
+        ),
+      ),
+    );
+    const renderedActivities = activityList(
+      this.activities.map((act) => [act, this.activities.indexOf(act)]),
+    );
+    this.parent.insertAdjacentHTML("beforeend", renderedActivities);
+    document
+      .querySelectorAll(".addItem")
+      .forEach(this.setAddEventListener.bind(this));
+    const categoryParent = document.querySelector(".category-list");
+    this.loader.removeOnFetch(categoryParent, "loading");
   }
 
   renderCategoryButtons() {
-    this.parent.insertAdjacentHTML("afterbegin", activityButtons())
+    this.parent.insertAdjacentHTML("afterbegin", activityButtons());
   }
-
 }

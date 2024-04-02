@@ -16,11 +16,11 @@ const sortMenu = () => {
         </select>
       </label>
     </section>  
-  `
-}
+  `;
+};
 
 const activityItem = (activity) => {
-  const obj = base64ToJson(activity)
+  const obj = base64ToJson(activity);
   return `
     <a href="/randapp/activity_details/?data=${activity}">
       <li class="btn btn-orange activity-list_item">
@@ -33,45 +33,51 @@ const activityItem = (activity) => {
         </div>
       </li>
     </a>
-  `
-}
+  `;
+};
 
-const activityList = (activities) => `<ul class="myActivityList fw">${activities.map(activityItem).join("")}</ul>`;
+const activityList = (activities) =>
+  `<ul class="myActivityList fw">${activities.map(activityItem).join("")}</ul>`;
 
 export default class MyActivities {
   constructor(activityList, parentElement) {
-    this.activityList = activityList
-    this.parentElement = parentElement
+    this.activityList = activityList;
+    this.parentElement = parentElement;
   }
 
   init() {
-    const filter = getParams("filter")
-    this.renderSortMenu()
-    this.renderActivities(filter)
-    filter ? this.setSortMenuValue(filter) : null
-
+    const filter = getParams("filter");
+    this.renderSortMenu();
+    this.renderActivities(filter);
+    filter ? this.setSortMenuValue(filter) : null;
   }
 
   renderSortMenu() {
-    this.parentElement.insertAdjacentHTML("afterbegin", sortMenu())
-    document.querySelector("#sort").addEventListener("change", e => {
-      this.renderActivities(e.target.value)
-      const children = document.querySelector(".myActivityList")
-      this.parentElement.removeChild(children)
-    })
+    this.parentElement.insertAdjacentHTML("afterbegin", sortMenu());
+    document.querySelector("#sort").addEventListener("change", (e) => {
+      this.renderActivities(e.target.value);
+      const children = document.querySelector(".myActivityList");
+      this.parentElement.removeChild(children);
+    });
   }
 
   setSortMenuValue(value) {
-    document.querySelector("#sort").value = value
+    document.querySelector("#sort").value = value;
   }
 
   renderActivities(sort = null) {
-    const list = sort && sort !== "all" ? filterActivities(this.activityList, sort) : this.activityList
-    const renderedList = activityList(list)
+    const list =
+      sort && sort !== "all"
+        ? filterActivities(this.activityList, sort)
+        : this.activityList;
+    const renderedList = activityList(list);
     if (this.activityList.length > 0) {
-      this.parentElement.insertAdjacentHTML("beforeend", renderedList)
+      this.parentElement.insertAdjacentHTML("beforeend", renderedList);
     } else {
-      this.parentElement.insertAdjacentHTML("afterbegin", "<h2>You have not added any activity yet. Click</h2><a href='/randapp/' class='btn btn-aqua'>Home<a><h2>for more options</h2>")
+      this.parentElement.insertAdjacentHTML(
+        "afterbegin",
+        "<h2>You have not added any activity yet. Click</h2><a href='/randapp/' class='btn btn-aqua'>Home<a><h2>for more options</h2>",
+      );
     }
   }
 }

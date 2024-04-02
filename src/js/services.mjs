@@ -1,8 +1,8 @@
-import { joinData, setLocalStorage } from "./utils"
+import { joinData } from "./utils";
 
-const ACTIVITY_URL = import.meta.env.VITE_ACTIVITY_URL
-const UNSPLASH_URL = import.meta.env.VITE_UNSPLASH_URL
-const UNSPLASH_ACCESS = import.meta.env.VITE_UNSPLASH_ACCESS
+const ACTIVITY_URL = import.meta.env.VITE_ACTIVITY_URL;
+const UNSPLASH_URL = import.meta.env.VITE_UNSPLASH_URL;
+const UNSPLASH_ACCESS = import.meta.env.VITE_UNSPLASH_ACCESS;
 
 /*
 https://calendar.google.com/calendar/render?
@@ -45,48 +45,48 @@ https://calendar.yahoo.com/?
 */
 
 const responseToJson = async (res, api) => {
-  const response = await res.json()
-  localStorage.setItem(api, res.ok)
+  const response = await res.json();
+  localStorage.setItem(api, res.ok);
   if (res.ok) {
-    return response
+    return response;
   } else {
-    throw res
+    throw res;
   }
-}
+};
 
 export default class ExternalServices {
-
   constructor() {
-    this.activity = []
-    this.photo = []
-    this.item = {}
+    this.activity = [];
+    this.photo = [];
+    this.item = {};
   }
 
   async fetchRandomActivity(type) {
-    const response = await fetch(type ? `${ACTIVITY_URL}${type}` : `${ACTIVITY_URL}`)
-    const data = await responseToJson(response, "boredApi")
-    return data
+    const response = await fetch(
+      type ? `${ACTIVITY_URL}${type}` : `${ACTIVITY_URL}`,
+    );
+    const data = await responseToJson(response, "boredApi");
+    return data;
   }
 
   async fetchRelatedImages(text = "random activity") {
     const response = await fetch(`${UNSPLASH_URL}&query=${text}`, {
       type: "GET",
       headers: {
-        "Authorization": `Client-ID ${UNSPLASH_ACCESS}`,
+        Authorization: `Client-ID ${UNSPLASH_ACCESS}`,
         "x-total": "10",
-        "w": "1920",
-        "h": "1080"
-      }
-    })
-    const data = await responseToJson(response, "unsplashApi")
-    return data
+        w: "1920",
+        h: "1080",
+      },
+    });
+    const data = await responseToJson(response, "unsplashApi");
+    return data;
   }
 
   async getRandomActivity(type = null) {
-    this.activity = await this.fetchRandomActivity(type)
-    this.photo = await this.fetchRelatedImages(this.activity.activity)
-    const data = joinData(this.activity, this.photo)
-    return data
+    this.activity = await this.fetchRandomActivity(type);
+    this.photo = await this.fetchRelatedImages(this.activity.activity);
+    const data = joinData(this.activity, this.photo);
+    return data;
   }
-
 }
