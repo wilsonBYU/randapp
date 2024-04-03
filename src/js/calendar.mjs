@@ -1,4 +1,4 @@
-const modalTemplate = (activity) => {
+const modalTemplate = (activity = {}) => {
   return `<dialog id="dialogCalendar" class="calendarModal">
     <h2>Save to your calendar!</h2>
     <form class="calendarForm">
@@ -12,17 +12,17 @@ const modalTemplate = (activity) => {
       </label>
       <label for="startdt" class="flexed">
         Date start: 
-        <input type="datetime-local" name="startdt" value="${activity.date}">
+        <input type="datetime-local" name="startdt" value="${activity.date ? activity.date + "T12:00:00" : new Date().toLocaleString("sv").split(" ").join("T")}">
       </label>
       <label for="enddt" class="flexed">
         Date end:
-        <input type="datetime-local" name="enddt">
-      </label>
-      <label for="allday">
-        All day
-        <input type="checkbox" name="allday">
-      </label>
-    </form>
+        <input type="datetime-local" name="enddt" value="${new Date().toLocaleString("sv").split(" ").join("T")}">
+      </label >
+  <label for="allday">
+    All day
+    <input type="checkbox" name="allday">
+  </label>
+    </form >
     <hr />
     <section class="action_buttons">
       <button class="btn fw btn-red gmail"><i class="fab fa-google"></i> Google Calendar</button>
@@ -31,39 +31,39 @@ const modalTemplate = (activity) => {
       <button class="btn fw btn-pink yahoo"><i class="fab fa-yahoo"></i> Yahoo! Calendar</button>
       <button class="btn fw btn-green close"><i class="fas fa-times"></i> Close</button>
       </section>
-  </dialog>`;
+  </dialog > `;
 };
 
 const googleCalendarURLTemplate = (data, base64) => {
   const datest = new Date(data.startdt);
   const enddate = new Date(data.enddt);
   const url = `https://calendar.google.com/calendar/render?
-  action=TEMPLATE
-  &dates=${datest.getFullYear()}${("0" + (datest.getMonth() + 1)).slice(-2)}${("0" + datest.getDate()).slice(-2)}%2F${enddate.getFullYear()}${("0" + (enddate.getMonth() + 1)).slice(-2)}${("0" + enddate.getDate()).slice(-2)}
-  &details=${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
-  &text=${encodeURI(data.subject)}`;
+action = TEMPLATE
+  & dates=${datest.getFullYear()}${("0" + (datest.getMonth() + 1)).slice(-2)}${("0" + datest.getDate()).slice(-2)}% 2F${enddate.getFullYear()}${("0" + (enddate.getMonth() + 1)).slice(-2)}${("0" + enddate.getDate()).slice(-2)}
+  & details=${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
+  & text=${encodeURI(data.subject)} `;
   const strippedUrl = url.split(" ").join("");
   return strippedUrl;
 };
 
 const outlookCalendarTemplate = (data, base64) => {
   const url = `https://outlook.live.com/calendar/0/action/compose?
-  allday=${data.allday === "on" ? "true" : "false"}
-  &body=${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
-  &enddt=${data.enddt}
-  &location=https://wilsonbyu.github.io/randapp/
-  &path=%2Fcalendar%2Faction%2Fcompose
-  &rru=addevent
-  &startdt=${data.startdt}
-  &subject=${encodeURI(data.subject)}`;
+allday = ${data.allday === "on" ? "true" : "false"}
+  & body=${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
+  & enddt=${data.enddt}
+  & location=https://wilsonbyu.github.io/randapp/
+  & path=% 2Fcalendar % 2Faction % 2Fcompose
+  & rru=addevent
+    & startdt=${data.startdt}
+  & subject=${encodeURI(data.subject)} `;
   const strippedUrl = url.split(" ").join("");
   return strippedUrl;
 };
 
 const officeCalendarTemplate = (data, base64) => {
   const url = `https://outlook.office.com/calendar/action/compose?
-  allday=${data.allday === "on" ? "true" : "false"}
-  &body=${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
+allday = ${data.allday === "on" ? "true" : "false"}
+  & body=${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
   & enddt=${data.enddt}
   & location=https://wilsonbyu.github.io/randapp/
   & path=% 2Fcalendar % 2Faction % 2Fcompose &
@@ -76,7 +76,7 @@ const officeCalendarTemplate = (data, base64) => {
 
 const yahooCalendarTemplate = (data, base64) => {
   const url = `https://calendar.yahoo.com/?
-  desc = ${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
+desc = ${encodeURI(data.body)}${encodeURI("\n See activity https://wilsonbyu.github.io/randapp/activity_details/?data=")}${base64}
   & dur=${data.allday === "on" ? "allday" : ""}
   & et=${data.enddt}
   & in_loc=https://wilsonbyu.github.io/randapp/

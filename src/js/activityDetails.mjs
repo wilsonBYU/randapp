@@ -54,13 +54,18 @@ export default class ActivityDetails {
     this.handleFormData();
     this.handleLoad();
     this.modal.init();
-    document.querySelector(".export").addEventListener("click", () => this.modal.showModal());
+    document.querySelector(".export").addEventListener("click", () => {
+      this.modal.setActivity(this.dataJson, this.data);
+      this.modal.showModal();
+
+    });
   }
 
   save() {
     let storageData = getLocalStorage("activities") || [];
     const itemIndex = storageData.indexOf(this.data);
     const newItem = jsonToBase64(this.dataJson);
+    this.data = newItem;
     if (itemIndex >= 0) {
       const cleanedData = storageData.filter((item) => item !== this.data);
       storageData = [...cleanedData, newItem];
