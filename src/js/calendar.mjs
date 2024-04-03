@@ -95,7 +95,7 @@ export default class CalendarExporter {
     this.activity64 = base64;
   }
   init() {
-    document.querySelector(".main_container").insertAdjacentHTML("afterBegin", modalTemplate(this.activity));
+    this.addModal();
     this.modal = document.querySelector(".calendarModal");
     this.handleClose();
     this.handleGmail();
@@ -104,9 +104,15 @@ export default class CalendarExporter {
     this.handleYahoo();
   }
 
+  addModal() {
+    document.querySelector(".main_container").insertAdjacentHTML("afterBegin", modalTemplate(this.activity));
+  }
+
   setActivity(activity, base64) {
     this.activity = activity;
     this.activity64 = base64;
+    this.modal.remove();
+    this.init();
   }
 
   showModal() {
