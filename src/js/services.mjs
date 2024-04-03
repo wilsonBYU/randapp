@@ -7,42 +7,51 @@ const UNSPLASH_ACCESS = import.meta.env.VITE_UNSPLASH_ACCESS;
 /*
 https://calendar.google.com/calendar/render?
   action=TEMPLATE
-  &text=title of the event
-  &details=more details about the event
-  &recur=RRULE:FREQ%3DWEEKLY;UNTIL%3D20210603
-  &ctz=timezone here
-  &dates=20220112T180000Z%2F20220112T200000Z
-  &location=New%20Earth
+  &dates=20240402%2F20240403
+  &details=Talk%20a%20pet%20to%20a%20walk%21
+  &location=randapp.com
+  &text=this%20is%20a%20testroom
 
-https://outlook.office.com/calendar/0/deeplink/compose?
-  body=Learn%20all%20about%20the%20rules%20of%20the%20Motorway%20and%20how%20to%20access%20the%20fast%20lane.%0A%0Ahttps%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGridlock_%28Doctor_Who%29
-  &enddt=2022-01-12T20%3A00%3A00%2B00%3A00
-  &location=New%20Earth
-  &path=%2Fcalendar%2Faction%2Fcompose
+https://outlook.live.com/calendar/0/action/compose?
+  allday=true&
+  body=Talk%20a%20pet%20to%20a%20walk%21&
+  enddt=2024-04-03T06%3A00%3A00%2B00%3A00&
+  location=randapp.com&
+  path=%2Fcalendar%2Faction%2Fcompose
   &rru=addevent
-  &startdt=2022-01-12T18%3A00%3A00%2B00%3A00
-  &subject=Welcome%20to%20the%20Motorway
+  &startdt=2024-04-02T06%3A00%3A00%2B00%3A00&
+  subject=this%20is%20a%20testroom
 
-
-https://calendar.aol.com/?
-  desc=Learn%20all%20about%20the%20rules%20of%20the%20Motorway%20and%20how%20to%20access%20the%20fast%20lane.%0A%0Ahttps%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGridlock_%28Doctor_Who%29
-  &dur=
-  &et=20220112T190000Z
-  &in_loc=New%20Earth
-  &st=20220112T170000Z
-  &title=Welcome%20to%20the%20Motorway
-  &v=60
-
+https://outlook.office.com/calendar/action/compose?
+  allday=true&
+  body=Talk%20a%20pet%20to%20a%20walk%21&
+  enddt=2024-04-03T06%3A00%3A00%2B00%3A00&
+  location=randapp.com&
+  path=%2Fcalendar%2Faction%2Fcompose&
+  rru=addevent&
+  startdt=2024-04-02T06%3A00%3A00%2B00%3A00&
+  subject=this%20is%20a%20testroom
 
 https://calendar.yahoo.com/?
-  desc=Learn%20all%20about%20the%20rules%20of%20the%20Motorway%20and%20how%20to%20access%20the%20fast%20lane.%0A%0Ahttps%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGridlock_%28Doctor_Who%29
+  desc=Talk%20a%20pet%20to%20a%20walk%21
   &dur=
-  &et=20220112T190000Z
-  &in_loc=New%20Earth
-  &st=20220112T170000Z
-  &title=Welcome%20to%20the%20Motorway
+  &et=20240402T154500Z
+  &in_loc=randapp.com
+  &st=20240402T151500Z
+  &title=this%20is%20a%20testroom
   &v=60
+
+https://calendar.yahoo.com/?
+  desc=Talk%20a%20pet%20to%20a%20walk%21&
+  dur=&et=20240402T154500Z&
+  in_loc=randapp.com&
+  st=20240402T151500Z&
+  title=this%20is%20a%20testroom&
+  v=60
+
 */
+
+
 
 const responseToJson = async (res, api) => {
   const response = await res.json();

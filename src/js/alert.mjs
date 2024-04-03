@@ -32,7 +32,6 @@ export default class Alert {
 
   handleContainer() {
     const hasAlertContainer = document.querySelector(".alert-container");
-    console.log(hasAlertContainer);
     hasAlertContainer ? null : this.addAlertContainer();
   }
 
