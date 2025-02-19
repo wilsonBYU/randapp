@@ -1,4 +1,9 @@
-import { base64ToJson, getLocalStorage, jsonToBase64, setLocalStorage } from "./utils";
+import {
+  base64ToJson,
+  getLocalStorage,
+  jsonToBase64,
+  setLocalStorage,
+} from "./utils";
 import Loader from "./loader.mjs";
 import Alert from "./alert.mjs";
 import CalendarExporter from "./calendar.mjs";
@@ -57,7 +62,6 @@ export default class ActivityDetails {
     document.querySelector(".export").addEventListener("click", () => {
       this.modal.setActivity(this.dataJson, jsonToBase64(this.dataJson));
       this.modal.showModal();
-
     });
   }
 

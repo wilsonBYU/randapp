@@ -156,7 +156,7 @@ h1 {
   text-shadow: 0 2px 0 var(--background-color-dark);
 }
 
-h1>a {
+h1 > a {
   text-decoration: none;
   color: black;
 }
@@ -259,7 +259,7 @@ a {
   width: 100%;
 }
 
-.main-example_activity>.picture_container {
+.main-example_activity > .picture_container {
   max-height: 550px;
   padding: 0;
   margin: 0;
@@ -271,7 +271,7 @@ a {
   box-shadow: var(--cast-shadow) var(--orange-dark);
 }
 
-.main-example_activity>.picture_container>img {
+.main-example_activity > .picture_container > img {
   max-width: 100%;
   height: auto;
   margin: 0;
@@ -284,12 +284,12 @@ a {
   padding: 0;
 }
 
-.myActivityList>a {
+.myActivityList > a {
   text-decoration: none;
   color: black;
 }
 
-.activity-list_item>a {
+.activity-list_item > a {
   text-decoration: none;
   color: black;
 }
@@ -342,7 +342,7 @@ a {
   align-items: center;
 }
 
-.loader-animation>i {
+.loader-animation > i {
   animation: rotate 1s linear infinite;
   font-size: 3em;
 }
@@ -441,7 +441,7 @@ p {
   gap: 1em;
 }
 
-.calendarForm>.flexed {
+.calendarForm > .flexed {
   display: flex;
   flex-direction: column;
 }
@@ -451,7 +451,7 @@ p {
   gap: 2em;
 }
 
-.details-options:first-child>span:first-child:after {
+.details-options:first-child > span:first-child:after {
   content: "|";
 }
 
@@ -568,7 +568,7 @@ p {
     height: auto;
   }
 
-  .main-example_activity>.picture_container {
+  .main-example_activity > .picture_container {
     border: none;
     box-shadow: none;
     border-radius: 0;
@@ -581,7 +581,7 @@ p {
     display: none;
   }
 
-  .main-example_activity>.picture_container>img {
+  .main-example_activity > .picture_container > img {
     border: var(--border) var(--orange-dark);
     border-radius: var(--border-radius);
     box-shadow: var(--cast-shadow) var(--orange-dark);
@@ -608,10 +608,8 @@ p {
     gap: 1em;
   }
 
-  .details-options>span {
+  .details-options > span {
     width: 100%;
     display: block;
-
   }
-
 }

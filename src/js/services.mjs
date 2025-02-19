@@ -51,8 +51,6 @@ https://calendar.yahoo.com/?
 
 */
 
-
-
 const responseToJson = async (res, api) => {
   const response = await res.json();
   localStorage.setItem(api, res.ok);

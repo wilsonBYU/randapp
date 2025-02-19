@@ -105,7 +105,9 @@ export default class CalendarExporter {
   }
 
   addModal() {
-    document.querySelector(".main_container").insertAdjacentHTML("afterBegin", modalTemplate(this.activity));
+    document
+      .querySelector(".main_container")
+      .insertAdjacentHTML("afterBegin", modalTemplate(this.activity));
   }
 
   setActivity(activity, base64) {
@@ -125,7 +127,7 @@ export default class CalendarExporter {
 
   dataToJson() {
     const info = new FormData(document.querySelector(".calendarForm"));
-    info.forEach((value, key) => this.data[key] = value);
+    info.forEach((value, key) => (this.data[key] = value));
   }
 
   handleGmail() {
@@ -165,5 +167,4 @@ export default class CalendarExporter {
       this.modal.close();
     });
   }
-
 }
