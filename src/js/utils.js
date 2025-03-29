@@ -82,6 +82,6 @@ const header = () => {
 
 const footer = () => {
   return `
-    <p>Wilson Romero | BYU-I CIT330 | ${new Date().getFullYear()} | Powered by <a href="https://unsplash.com/">Unsplash.com</a> & <a href="http://www.boredapi.com/">Boredapi.com</a>
+    <p>Wilson Romero | BYU-I CIT330 | ${new Date().getFullYear()} | Powered by <a href="https://unsplash.com/">Unsplash.com</a> & <a href="https://bored.api.lewagon.com/">Boredapi.com</a>
   `;
 };
